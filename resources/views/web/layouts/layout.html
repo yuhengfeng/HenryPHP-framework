@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>HenryPHP</title>
+    <link rel="stylesheet" href="{{ asset('css/error_message.css') }}">
+</head>
+<body>
+    <div class="header">
+        <div class="layui-main layui-bg-cyan">
+
+        </div>
+    </div>
+
+    <div class="contain">
+        <div class="content">
+            {% block content %}
+
+            {% endblock %}
+        </div>
+    </div>
+    <div class="footer">
+        <div class="layui-main layui-bg-cyan">
+            {#<p>© 2018 HenryPHP.com MIT license</p>#}
+        </div>
+    </div>
+
+</body>
+</html>

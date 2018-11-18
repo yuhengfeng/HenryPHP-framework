@@ -1,0 +1,23 @@
+{
+  "name": "henryphp/henryphp",
+  "description": "the new henryphp framework",
+  "type": "project",
+  "authors": [
+    {
+      "name": "henry.yu",
+      "email": "henry.yu1175@gmail.com"
+    }
+  ],
+  "require": {
+    "symfony/var-dumper": "^4.1",
+    "twig/twig": "^2.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "app\\": "app",
+      "core\\": "core"
+    },
+    "files":[
+    ]
+  }
+}
