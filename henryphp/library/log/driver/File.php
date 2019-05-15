@@ -14,7 +14,7 @@ use henryphp\App;
 class File
 {
     protected $config = [
-        'time_format' => ' c ',
+        'time_format' => 'Y-m-d H:i:s',
         'single'      => false,
         'file_size'   => 2097152,
         'path'        => '',
@@ -101,7 +101,8 @@ class File
         $this->checkLogSize($destination);
 
         // 日志信息封装
-        $info['timestamp'] = date($this->config['time_format']);
+        date_default_timezone_set('Asia/Shanghai');
+        $info['timestamp'] = date($this->config['time_format'],time());
 
         foreach ($message as $type => $msg) {
             $info[$type] = is_array($msg) ? implode("\r\n", $msg) : $msg;

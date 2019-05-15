@@ -188,7 +188,7 @@ class Request
     {
         if (!$this->url) {
             if ($this->isCli()) {
-                $this->url = isset($_SERVER['argv'][1]) ? $_SERVER['argv'][1] : '';
+                $this->url = CMD_URI;
             } elseif ($this->server('HTTP_X_REWRITE_URL')) {
                 $this->url = $this->server('HTTP_X_REWRITE_URL');
             } elseif ($this->server('REQUEST_URI')) {
@@ -200,7 +200,7 @@ class Request
             }
         }
 
-        return $complete ? $this->domain() . $this->url : $this->url;
+        return $complete ? $this->domain() . trim($this->url) : trim($this->url);
     }
 
     /**
@@ -302,9 +302,26 @@ class Request
 
         //.........
 
-        return $this->param;
+        return $this->filterParams($this->param);
     }
 
+    /**
+     * 过滤 id/1?test=name&kh=9/city/sh/t/1 请求参数
+     * @return array
+     */
+    protected function filterParams($param)
+    {
+        $uri = str_replace(array("?","=","&"),array("/","/","/"),$this->url());
+        $aUri = array_filter(explode("/",$uri));
+        $aUri = array_slice($aUri,3);
+        $input = array();
+        for ($i = 0 ; $i < count($aUri)-1 ; $i ++){
+            if ($i % 2 == 0){
+                $input[$aUri[$i]] = $aUri[$i+1];
+            }
+        }
+        return array_merge($param,$input);
+    }
     /**
      * 获取请求参数
      * 字符串之间可以用'.'符号获取多层参数
@@ -514,8 +531,11 @@ class Request
         if (!$this->host) {
             $this->host = $this->server('HTTP_X_REAL_HOST') ?: $this->server('HTTP_HOST');
         }
-
-        return true === $strict && strpos($this->host, ':') ? strstr($this->host, ':', true) : $this->host;
+        if ($this->isCli()){
+            return CMD_HOST;
+        }else{
+            return true === $strict && strpos($this->host, ':') ? strstr($this->host, ':', true) : $this->host;
+        }
     }
 
     /**
