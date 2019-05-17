@@ -24,9 +24,8 @@ class IndexController extends Controller
 
     public function index()
     {
-        $data = $this->articles->getAll();
+        $data = $this->articles->all();
 
-//        dd($data);
 
         $this->view();
     }

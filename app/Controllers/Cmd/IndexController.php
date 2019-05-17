@@ -10,14 +10,16 @@ namespace app\Controllers\Cmd;
 
 
 use app\Controllers\Controller;
+use app\Models\Articles;
 
 class IndexController extends Controller
 {
 
     public function index()
     {
-        $input = $this->request->all();
-        dd($input);
+        $test = config();
+        $users = Articles::all();
+        dd($test);
     }
 
 }

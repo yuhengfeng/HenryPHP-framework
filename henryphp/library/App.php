@@ -8,6 +8,7 @@
 
 namespace henryphp;
 
+use Dotenv\Dotenv;
 use Exception;
 
 class App extends Container
@@ -110,10 +111,11 @@ class App extends Container
 
         //4、检测敏感字符并删除
 
-        //5、读取配置信息
+        //5、数据库配置
+        $this->database();
 
         //6、路由配置，读取路由
-        $this->routeInit();
+        $this->route();
     }
 
     //初始化应用
@@ -141,11 +143,8 @@ class App extends Container
 
         // 注册类库别名
 
-        // 数据库配置初始化
-//        Db::init($this->config->pull('database'));
-
         // 设置系统时区
-//        date_default_timezone_set($this->config('app.default_timezone'));
+        date_default_timezone_set($this->config('app.default_timezone'));
 
         // 读取语言包
 
@@ -181,7 +180,16 @@ class App extends Container
         // 加载中间件
 
         // 注册服务的容器对象实例
+        if (is_file($this->appPath.DIRECTORY_SEPARATOR.'service.php')){
+            $services = include $this->appPath.DIRECTORY_SEPARATOR.'service.php';
+            if (is_array($services)){
+                $this->bindTo($services);
+            }
+        }
+        //解析.env文件
+        $dotenv = Dotenv::create(ROOT_PATH);
 
+        $dotenv->load();
         // 自动读取配置文件
         if (is_dir($this->configPath.$module))
         {
@@ -209,20 +217,15 @@ class App extends Container
     {
         dd($this->config);
     }
+
     /**
-     * 路由加载
+     * 数据库配置
      */
-    public function routeInit()
+    public function database()
     {
-        //.....
-        $config = $this->config('database');
-        if ($config) {
-            define('DB_HOST', $config['hostname']);
-            define('DB_NAME', $config['database']);
-            define('DB_USER', $config['username']);
-            define('DB_PASS', $config['password']);
+        if ($this->has('database')){
+            call_user_func_array(array($this->get('database'),'boot'),[]);
         }
-        $this->route();
     }
 
     // 路由处理

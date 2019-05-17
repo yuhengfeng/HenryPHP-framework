@@ -9,9 +9,7 @@
 
 namespace app\Models;
 
-use henryphp\base\Model as BaseModel;
-
-class Model extends BaseModel
+class ModelBase extends \henryphp\base\Model
 {
 
 }

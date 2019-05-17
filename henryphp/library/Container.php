@@ -11,6 +11,7 @@ namespace henryphp;
 use Closure;
 use henryphp\base\View;
 use henryphp\exception\ClassNotFoundException;
+use henryphp\Providers\DatabaseServiceProvider;
 use InvalidArgumentException;
 use ReflectionClass;
 use ReflectionException;
@@ -41,6 +42,7 @@ class Container implements \ArrayAccess
         'log'       =>      Log::class,
         'request'   =>      Request::class,
         'view'      =>      View::class,
+        'database'  =>      DatabaseServiceProvider::class
     ];
 
     /**

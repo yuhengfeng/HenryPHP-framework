@@ -11,17 +11,17 @@ return [
     'app_debug' => true,
 
     // 错误显示信息,非调试模式有效
-    'error_message'  => '页面出现错误！请稍后再试呗～',
+    'error_message'  => env('ERROR_MESSAGE','页面出现错误！请稍后再试呗～'),
 
     //异常显示页面
     'exception_tmpl' => EXCEPTION_PATH.'/henryPHP_exception.tpl',
 
-    'default_timezone' => 'Asia/Shanghai',
+    'default_timezone' => env('DEFAULT_TIMEZONE','Asia/Shanghai'),
 
-    //模块配置
+    //默认模块配置
     'modules' => [
-        'default' => 'Web',
-        'default_controller' => 'Index',
-        'default_action' => 'index',
+        'default' => env('DEFAULT_MODULES','Web'),
+        'default_controller' => env('DEFAULT_CONTROLLER','Index'),
+        'default_action' => env('DEFAULT_ACTION','index'),
     ]
 ];

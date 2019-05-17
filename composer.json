@@ -10,7 +10,10 @@
   ],
   "require": {
     "symfony/var-dumper": "^4.1",
-    "twig/twig": "^2.0"
+    "twig/twig": "^2.0",
+    "illuminate/database": "^5.8",
+    "vlucas/phpdotenv": "^3.3",
+    "doctrine/dbal": "^2.9"
   },
   "autoload": {
     "psr-4": {
