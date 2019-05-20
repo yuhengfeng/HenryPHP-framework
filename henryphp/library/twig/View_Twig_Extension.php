@@ -18,13 +18,13 @@ class View_Twig_Extension
     public function getFunctions()
     {
         return array(
-            new \Twig_Function('config', function($name = null, $default = null){
+            new \Twig\TwigFunction('config', function($name = null, $default = null){
                 return config($name, $default);
             }),
-            new \Twig_Function('asset', function($name = null){
+            new \Twig\TwigFunction('asset', function($name = null){
                 return asset($name);
             }),
-            new \Twig_Function('app', function($name = 'henryphp\App', $args = [], $newInstance = false){
+            new \Twig\TwigFunction('app', function($name = 'henryphp\App', $args = [], $newInstance = false){
                 return app($name, $args, $newInstance);
             }),
         );
@@ -32,9 +32,9 @@ class View_Twig_Extension
 
     /**
      *  注册php函数
-     * @param \Twig_Environment $twig_Environment
+     * @param \Twig\Environment $twig_Environment
      */
-    public function registerFunction(\Twig_Environment $twig_Environment)
+    public function registerFunction(\Twig\Environment $twig_Environment)
     {
         $function = $this->getFunctions();
 

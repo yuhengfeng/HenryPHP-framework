@@ -38,7 +38,7 @@ class View_Twig
      */
     public function view(array $data = [],$path,$filename,$namespace = 'http')
     {
-        $loader = new \Twig_Loader_Filesystem($path);
+        $loader = new \Twig\Loader\FilesystemLoader($path);
 
         $loader->addPath($path, $namespace);
 
@@ -51,7 +51,7 @@ class View_Twig
             $params = [];
         }
 
-        $twig = new \Twig_Environment($loader, $params);
+        $twig = new \Twig\Environment($loader, $params);
 
         //函数扩展
         $this->extension->registerFunction($twig);
