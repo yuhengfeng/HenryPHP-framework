@@ -2,10 +2,10 @@
 
 return [
     'type' => 'mysql',
-    'hostname' => '127.0.0.1',
-    'database' => 'henry_blog',
+    'hostname' => 'mysql5',
+    'database' => 'test',
     'username' => 'root',
-    'password' => '',
+    'password' => '123456',
     'hostport' => '',
     'charset' => 'utf8',
     'prefix' => '',
